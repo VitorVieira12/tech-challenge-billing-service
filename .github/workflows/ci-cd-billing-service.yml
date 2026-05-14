@@ -7,7 +7,7 @@ on:
     branches: [ fase-4, main ]
 
 env:
-  DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/billing-service
+  DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/billing-service
   EKS_CLUSTER: tech-challenge-cluster
   AWS_REGION: us-east-1
   K8S_NAMESPACE: billing-service
@@ -42,7 +42,8 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           mvn sonar:sonar \
-            -Dsonar.projectKey=billing-service \
+            -Dsonar.projectKey=VitorVieira12_tech-challenge-billing-service \
+            -Dsonar.organization=vitorvieira12 \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN \
             -B || echo "SonarQube not configured, skipping"
@@ -74,8 +75,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5

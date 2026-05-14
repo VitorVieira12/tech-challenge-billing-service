@@ -18,6 +18,9 @@
         <java.version>21</java.version>
         <jacoco.version>0.8.12</jacoco.version>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.organization>vitorvieira12</sonar.organization>
+        <sonar.projectKey>VitorVieira12_tech-challenge-billing-service</sonar.projectKey>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
