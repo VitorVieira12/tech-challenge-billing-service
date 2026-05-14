@@ -7,7 +7,7 @@ on:
     branches: [ fase-4, main ]
 
 env:
-  DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/billing-service
+  DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/billing-service
   EKS_CLUSTER: tech-challenge-cluster
   AWS_REGION: us-east-1
   K8S_NAMESPACE: billing-service
@@ -26,14 +26,8 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run unit tests
-        run: mvn test -B
-
-      - name: Generate JaCoCo coverage report
-        run: mvn jacoco:report -B
-
-      - name: Check coverage threshold (80%)
-        run: mvn jacoco:check@check -B
+      - name: Run tests and check coverage (80%)
+        run: mvn verify -B
 
       - name: SonarQube Analysis
         if: github.event_name == 'push'
