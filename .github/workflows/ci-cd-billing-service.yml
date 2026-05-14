@@ -33,7 +33,7 @@ jobs:
         run: mvn jacoco:report -B
 
       - name: Check coverage threshold (80%)
-        run: mvn jacoco:check -B
+        run: mvn jacoco:check@check -B
 
       - name: SonarQube Analysis
         if: github.event_name == 'push'
