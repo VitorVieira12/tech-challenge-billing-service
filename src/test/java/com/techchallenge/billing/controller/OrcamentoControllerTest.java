@@ -3,6 +3,7 @@ package com.techchallenge.billing.controller;
 import com.techchallenge.billing.domain.model.Orcamento;
 import com.techchallenge.billing.domain.model.StatusOrcamento;
 import com.techchallenge.billing.domain.service.OrcamentoService;
+import com.techchallenge.billing.messaging.publisher.BillingEventPublisher;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ class OrcamentoControllerTest {
 
     @Autowired MockMvc mockMvc;
     @MockBean OrcamentoService orcamentoService;
+    @MockBean BillingEventPublisher billingEventPublisher;
 
     @Test
     @DisplayName("GET /orcamentos deve retornar lista")

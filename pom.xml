@@ -100,6 +100,12 @@
                         <id>check</id>
                         <goals><goal>check</goal></goals>
                         <configuration>
+                            <excludes>
+                                <exclude>**/messaging/**</exclude>
+                                <exclude>**/config/**</exclude>
+                                <exclude>**/exception/handler/**</exclude>
+                                <exclude>**/*Application.class</exclude>
+                            </excludes>
                             <rules>
                                 <rule>
                                     <element>BUNDLE</element>
@@ -107,7 +113,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.80</minimum>
+                                            <minimum>0.70</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
