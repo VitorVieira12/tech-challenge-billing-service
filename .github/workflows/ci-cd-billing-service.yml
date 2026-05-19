@@ -102,8 +102,25 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.AWS_REGION }}
 
-      - name: Apply K8s manifests
-        run: kubectl apply -f k8s/
+      - name: Apply K8s manifests (namespace, configmap, service, deployment, hpa)
+        run: |
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/configmap.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/hpa.yaml
+
+      - name: Create or update Secret from GitHub Actions secrets
+        run: |
+          kubectl create secret generic billing-service-secret \
+            --namespace=${{ env.K8S_NAMESPACE }} \
+            --from-literal=SPRING_DATASOURCE_URL="${{ secrets.BILLING_DB_URL }}" \
+            --from-literal=SPRING_DATASOURCE_USERNAME="${{ secrets.BILLING_DB_USERNAME }}" \
+            --from-literal=SPRING_DATASOURCE_PASSWORD="${{ secrets.BILLING_DB_PASSWORD }}" \
+            --from-literal=RABBITMQ_USERNAME="${{ secrets.RABBITMQ_USERNAME }}" \
+            --from-literal=RABBITMQ_PASSWORD="${{ secrets.RABBITMQ_PASSWORD }}" \
+            --from-literal=MERCADOPAGO_ACCESS_TOKEN="${{ secrets.MERCADOPAGO_ACCESS_TOKEN }}" \
+            --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Update deployment image
         run: |
