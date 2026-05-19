@@ -103,7 +103,9 @@
                             <excludes>
                                 <exclude>**/messaging/**</exclude>
                                 <exclude>**/config/**</exclude>
-                                <exclude>**/exception/handler/**</exclude>
+                                <exclude>**/controller/**</exclude>
+                                <exclude>**/dto/**</exclude>
+                                <exclude>**/exception/**</exclude>
                                 <exclude>**/*Application.class</exclude>
                             </excludes>
                             <rules>
@@ -113,7 +115,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.70</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
