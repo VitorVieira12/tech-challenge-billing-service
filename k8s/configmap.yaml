@@ -5,6 +5,6 @@ metadata:
   namespace: billing-service
 data:
   SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
-  RABBITMQ_HOST: "rabbitmq-service.rabbitmq.svc.cluster.local"
+  RABBITMQ_HOST: "rabbitmq.rabbitmq.svc.cluster.local"
   RABBITMQ_PORT: "5672"
   RABBITMQ_VHOST: "/"
